@@ -22,6 +22,7 @@ train = tf.train.GradientDescentOptimizer(0.2).minimize(loss)
 correct = tf.equal(tf.arg_max(y,1),tf.arg_max(prediction,1))
 accurancy = tf.reduce_mean(tf.cast(correct,tf.float32))
 
+
 with tf.Session() as sess:
     init = tf.global_variables_initializer()
     sess.run(init)
