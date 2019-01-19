@@ -15,8 +15,8 @@ y = tf.placeholder(tf.float32,[None,10])
 
 
 W2 = tf.Variable(tf.zeros([784,10]),dtype=tf.float32)
-b2 = tf.Variable(tf.zeros([10]),dtype=tf.float32)x
-prediction = tf.nn.softmax(tf.add(tf.matmul(,W2),b2))
+b2 = tf.Variable(tf.zeros([10]),dtype=tf.float32)
+prediction = tf.nn.softmax(tf.add(tf.matmul(x,W2),b2))
 
 
 
