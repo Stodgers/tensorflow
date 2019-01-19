@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 
 mnist = input_data.read_data_sets("MNIST_data",one_hot=True)
 
-
 batch_size = 100
 n_batch = mnist.train.num_examples //batch_size
 x = tf.placeholder(tf.float32,[None,784])
@@ -15,8 +14,6 @@ y = tf.placeholder(tf.float32,[None,10])
 W = tf.Variable(tf.zeros([784,10]),dtype=tf.float32)
 b = tf.Variable(tf.zeros([10]),dtype=tf.float32)
 prediction = tf.nn.softmax(tf.add(tf.matmul(x,W),b))
-
-
 
 #均方误差
 loss = tf.reduce_mean(tf.square(y-prediction))
@@ -28,7 +25,6 @@ accurancy = tf.reduce_mean(tf.cast(correct,tf.float32))
 with tf.Session() as sess:
     init = tf.global_variables_initializer()
     sess.run(init)
-
     for epoch in range(200):
         for batch in range(n_batch):
             batc_x,batch_y = mnist.train.next_batch(batch_size)
