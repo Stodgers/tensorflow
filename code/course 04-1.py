@@ -1,0 +1,38 @@
+import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
+import numpy as np
+import matplotlib.pyplot as plt
+
+mnist = input_data.read_data_sets("MNIST_data",one_hot=True)
+
+batch_size = 100
+n_batch = mnist.train.num_examples //batch_size
+x = tf.placeholder(tf.float32,[None,784])
+y = tf.placeholder(tf.float32,[None,10])
+
+#nn
+W = tf.Variable(tf.zeros([784,10]),dtype=tf.float32)
+b = tf.Variable(tf.zeros([10]),dtype=tf.float32)
+prediction = tf.nn.softmax(tf.add(tf.matmul(x,W),b))
+
+#均方误差
+#loss = tf.reduce_mean(tf.square(y-prediction))
+loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=y,logits=prediction))
+train = tf.train.GradientDescentOptimizer(0.2).minimize(loss)
+
+correct = tf.equal(tf.arg_max(y,1),tf.arg_max(prediction,1))
+accurancy = tf.reduce_mean(tf.cast(correct,tf.float32))
+
+with tf.Session() as sess:
+    init = tf.global_variables_initializer()
+    sess.run(init)
+    for epoch in range(20):
+        for batch in range(n_batch):
+            batc_x,batch_y = mnist.train.next_batch(batch_size)
+            sess.run(train,feed_dict={x:batc_x,y:batch_y})
+        acc = sess.run(accurancy, feed_dict={x: batc_x, y: batch_y})
+        print(" epoch: ",epoch,"  ACC: ",acc,"  loss: ",sess.run(loss,feed_dict={x:batc_x,y:batch_y}))
+
+    acc = sess.run(accurancy, feed_dict={x: batc_x, y: batch_y})
+    print("acc: ",sess.run(accurancy, feed_dict={x: batc_x, y: batch_y}))
+
