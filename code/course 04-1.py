@@ -33,6 +33,6 @@ with tf.Session() as sess:
         acc = sess.run(accurancy, feed_dict={x: batc_x, y: batch_y})
         print(" epoch: ",epoch,"  ACC: ",acc,"  loss: ",sess.run(loss,feed_dict={x:batc_x,y:batch_y}))
 
-    acc = sess.run(accurancy, feed_dict={x: batc_x, y: batch_y})
-    print("acc: ",sess.run(accurancy, feed_dict={x: batc_x, y: batch_y}))
+    acc = sess.run(accurancy, feed_dict={x: mnist.train.images, y: mnist.train.labels})
+    print("acc: ",acc)
 
