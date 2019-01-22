@@ -123,6 +123,5 @@ with tf.Session() as sess:
             batch_xs, batch_ys = mnist.test.next_batch(batch_size)
             test_summary = sess.run(meraged, feed_dict={x: batch_xs, y: batch_ys, keep_prob: 1.0})
             test_writer.add_summary(test_summary, batch*epoch)
-
         ACs = sess.run(AC_,feed_dict={x:mnist.test.images,y:mnist.test.labels,keep_prob:1.0})
         print("Epoch: ",epoch,"   acc: ",ACs)
