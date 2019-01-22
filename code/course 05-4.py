@@ -93,7 +93,6 @@ embed.sprite.image_path = DIR + '/projector/data/mnist_10k_sprite.png'
 embed.sprite.single_image_dim.extend([28,28])
 projector.visualize_embeddings(projector_writer,config)
 
-
 init = tf.global_variables_initializer()
 sess.run(init)
 writer = tf.summary.FileWriter('logs/',sess.graph)
