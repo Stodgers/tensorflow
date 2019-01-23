@@ -18,6 +18,10 @@ def bias_variable(shape):
     return tf.Variable(initial)
 
 def conv2d(x,W):
+    #x input tensor of shape [batch,in_height,in_width,in_channels]
+    #channels if(black or white):1 ->grey rate)
+    #         if r g b  :
+    #W fliter /kernel tensor of shape [fliter_height,fliter_width,in_channels,out_channels]
     #strides=[a,b,c,d]
     #固定a=d=1，b代表x方向步长，y代表y方向上的步长
     return tf.nn.conv2d(x,W,strides=[1,1,1,1],padding='SAME')
